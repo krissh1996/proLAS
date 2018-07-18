@@ -1,0 +1,52 @@
+{%extends "base.html" %}
+
+{% block content %}
+			<form method="post" class="form-horizontal {% if form.errors or next %}error{% endif %}"
+		          action="{% url 'register' %}">
+		        {% csrf_token %}
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					
+					{{ form.first_name}}
+				</div>
+				<div class="col-sm-offset-2 col-sm-10">
+					
+					{{ form.last_name }}
+				</div>
+				{% if form.errors.username %}
+				<div class="col-sm-offset-2 col-sm-10">
+			        {{form.errors.username}}
+                </div>
+				{% endif %}
+				<div class="col-sm-offset-2 col-sm-10">
+                    {{ form.username }}
+				</div>
+				{% if form.errors.all %}
+			        <div class="ui error message">
+			        	{{form.errors.all}}
+                    </div>
+			        {% endif %}
+				<div class="col-sm-offset-2 col-sm-10">
+                    {{ form.password1 }}
+				</div>
+				<div class="col-sm-offset-2 col-sm-10">
+                    {{ form.password2 }}
+				</div>
+				{% if form.errors.email %}
+				<div class="ui error message">
+					{{form.errors.email}}
+				</div>
+			        {% endif %}
+				<div class="col-sm-offset-2 col-sm-10">
+                    {{ form.email }}
+				</div>
+                <div class="group">
+                    <button type="submit" class="btn btn-success black" style="color: #e0f2f1">Register</button>
+                </div><br>
+                <div class="col-sm-offset-2 col-sm-10" style="margin-top: 20px;">
+                    <a href="{% url 'login'  %}" style="color: white" >Already a member? Login</a>
+				</div>
+			</div>
+            </form>
+{% endblock content %}
+

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% load staticfiles %}</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>Germi App</title>
+
+  <!-- CSS  -->
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="{% static 'js/materialize.js' %}"></script>
+  <script src="{% static 'js/init.js' %}"></script>
+
+</head>
+<body>
+    <header>
+      <nav class="white" role="navigation">
+        <div class="nav-wrapper container">
+            {% if user.is_authenticated %}
+                <a id="logo-container" href="{% url 'WelcomePage' %}" class="brand-logo" style="color: black">proLAS</a>
+            {% else %}
+                <a id="logo-container" href="{% url 'index' %}" class="brand-logo" style="color: black">proLAS</a>
+            {% endif %}
+            <ul class="right hide-on-med-and-down" >
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}" style="color: black">Logout</a></li>
+                    <li><a href="{% url 'change_password' %}" style="color: black" >Change Password</a></li>
+                    <li><a href="{% url 'simple_upload' %}" style="color: black">Add LASFile</a></li>
+
+                {% else %}
+                    <li><a href="{% url 'login' %}" style="color: black">Login</a></li>
+                    <li><a href="{% url 'register' %}" style="color: black">Sign up</a></li>
+                {% endif %}
+            </ul>
+            <ul id="nav-mobile" class="side-nav">
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    <li><a href="{% url 'change_password' %}">Change Password</a></li>
+                    <li><a href="{% url 'simple_upload' %}" style="color: black">Add LASFile</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'register' %}">Sign up</a></li>
+            {% endif %}
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+
+        </div>
+      </nav>
+    </header>
+
+
+      <div id="index-banner" class="parallax-container">
+        <div class="section no-pad-bot">
+            <div class="container">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+      <div class="parallax"><img src="{% static 'images/2.jpg' %}" alt="Background image" /></div>
+      </div>
+
+
+
+
+      <footer class="page-footer indigo" >
+        <div class="container">
+          <div class="row">
+            <div class="col l6 s12">
+              <h5 class="white-text">About US</h5>
+              <p class="grey-text text-lighten-4">We are a team working on the development of this software. We try to bring out the most easily accesible features in the geophysical application.</p>
+
+
+            </div>
+            <div class="col l3 s12">
+              <h5 class="white-text">Sitemap</h5>
+              <ul>
+                  {% if user.is_authenticated %}
+                    <li><a class="white-text" href="{% url 'index' %}">Home</a></li>
+
+                  {% else %}
+                    <li><a class="white-text" href="{% url 'index' %}">Home</a></li>
+                    <li><a class="white-text" href="{% url 'register' %}">Register</a></li>
+                    <li><a class="white-text" href="{% url 'login' %}">Login</a></li>
+
+                  {% endif %}
+              </ul>
+            </div>
+            <div class="col l3 s12">
+              <h5 class="white-text">Contact</h5>
+               <div class="ui color-grey fw-300">
+                            <p class="grey-text text-lighten-4">Gujarat Energy Research and Management Institute<br>
+First Floor, Energy Building
+PDPU Campus, Raisan, Gandhinagar
+Gujarat-382007 INDIA
+                                </p>
+                            <div class="white-space space-mini"></div>
+                            <div class="phone color-grey">
+                                <i class="call icon color-primary" style="color: white"></i>+91 94 29452821
+                            </div>
+                            <div class="mail color-grey ui inverted link list">
+                                <a class="item" href="mailto:uday.u1111@gmail.com"><i
+                                        class="mail outline icon color-primary"></i> uday.u1111@gmail.com</a>
+                            </div>
+               </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer-copyright" >
+          <div class="container">
+          &copy; 2017 <a href="http://www.germi.org/"><b>GERMI</b></a> All Rights Reserved.
+          </div>
+        </div>
+      </footer>
+
+</body>
+
+</html>

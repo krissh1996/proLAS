@@ -1,0 +1,63 @@
+{%extends "base.html" %}
+<link rel="stylesheet" href="css/tyle.css">
+{% block content %}
+
+<div class="login-wrap">
+	<div class="login-html">
+		<div class="login-form">
+			<form method="post" class="ui large form {% if form.errors or next %}error{% endif %}"
+		          action="{% url 'register' %}">
+		        {% csrf_token %}
+			<div class="sign-up-htm">
+				<div class="group">
+					
+					{{ form.first_name}}
+				</div>
+				<div class="group">
+					
+					{{ form.last_name }}
+				</div>
+				{% if form.errors.username %}
+				<div class="ui error message">
+			        {{form.errors.username}}
+		                </div>
+				{% endif %}
+				<div class="group">
+					
+					{{ form.username }}
+				</div>
+				{% if form.errors.all %}
+			        <div class="ui error message">
+			        	{{form.errors.all}}
+		                </div>
+			        {% endif %}
+				<div class="group">
+					
+					{{ form.password1 }}
+				</div>
+				<div class="group">
+					
+					{{ form.password2 }}
+				</div>
+				{% if form.errors.email %}
+				<div class="ui error message">
+					{{form.errors.email}}
+				</div>
+			        {% endif %}
+				<div class="group">
+					
+					{{ form.email }}
+				</div>
+				
+				<input class="ui fluid huge green submit button fw-100" type="submit" value="Register"/>
+				<div class="hr"></div>
+				<div class="login-extras">
+					<label for="tab-1">Already have account?<a href="{% url 'login' %}">Login</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+  
+{% endblock content %}
+

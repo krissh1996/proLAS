@@ -1,0 +1,24 @@
+{%extends "base.html" %}
+
+{%block content %}
+
+    <h1 class="header center" style="color: White">Hello {{ request.user.username }}</h1>
+    <div class="row center">
+          <h3 class="header col s12 light" style="color: white">Welcome to proLAS </h3>
+    </div>
+    <div class="row center">
+          <h5 class="header col s12 light">We are glad that you are here. This is the most basic version of proLAS.
+        And we will keep updating the versions with many new features sooner.</h5>
+    </div>
+
+    {% if messages %}
+    {% for message in messages %}
+        {{ message}}
+    {% endfor %}
+    {% endif %}
+    <div class="row center">
+          <a href="{% url 'home' %}"  class="btn-large black " >Standard Plot</a>
+          <a href="{% url 'any' %}"  class="btn-large black " >Cross Plot</a>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row ">
+			<form method="post" class="form-horizontal {% if form.errors or next %}error{% endif %}"
+                  	action="{% url 'login' %}">
+                	{% csrf_token %}
+                        <div class="ui error message">
+                                    {% if form.errors %}
+                                        <p>Username and password didn't match. Try again.</p>
+                                    {% endif %}
+
+                                    {% if next %}
+                                        {% if user.is_authenticated %}
+                                            <p> Your account doesn't have access to this page. To proceed,
+                                                please login with an account that has access.</p>
+                                        {% else %}
+                                            <p>Please login to see this page.</p>
+                                        {% endif %}
+                                    {% endif %}
+                        </div>
+                        <div class="group">
+                            {{ form.username }}
+                        </div>
+                        <div class="group">
+                            {{ form.password }}
+                            <i class="privacy icon"></i>
+                        </div>
+                        <div class="group">
+                            <input id="check" type="checkbox" class="check" checked>
+                            <label for="check" style="color: white"><span class="icon" style="color: white"></span> Keep me Signed in</label>
+                        </div>
+                        <div class="group">
+                            <button type="submit" class="btn btn-success black" style="color: #e0f2f1">Login</button>
+                        </div>
+                        <div class="hr"></div>
+
+                        <br><br>
+                        <div class="foot-lnk" style="margin-top: 20px !important;">
+                            <a href="{% url 'reset_password' %}" class="forgot-password"  style="color: white">Forgot Password? </a>
+                            <a href="{% url 'register' %}" class="register color-orange" style="color: white">Register</a>
+                        </div>
+
+            </form>
+</div>
+{% endblock %}
+

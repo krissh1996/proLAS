@@ -1,0 +1,17 @@
+{% extends "view_container.html" %}
+
+{%  block details %}
+<h1>
+{% if messages %}
+    {% for message in messages %}
+        {{ message}}
+    {% endfor %}
+
+{% endif %}
+</h1>
+
+<div class="group">
+    <a class="btn btn-success black" href="{% url 'WelcomePage'  %} ">Home</a>
+</div>
+
+{% endblock %}

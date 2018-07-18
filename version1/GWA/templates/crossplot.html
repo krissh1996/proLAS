@@ -1,0 +1,48 @@
+{%extends "base.html" %}
+
+{%block content %}
+
+<div class="home_view ui container">
+
+    <h1>Cross Plot</h1>
+    <h4>Select the Logs for the tracks</h4>
+    {% if messages %}
+    {% for message in messages %}
+        {{ message}}
+    {% endfor %}
+    {% endif %}
+     <form class="form-horizontal" method="post" action="{% url 'doublesubmit' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+                     <div class="group" >
+                         <select name="First_Track" value="{{ request.POST.First_Track }}" class="browser-default" id="as" style=" color: black">
+                            <option value="" selected="selected"> First_Track</option>
+                         {% if curve_mnemonic %}
+                             {% for mnemonic in curve_mnemonic %}
+                                 <option class="opt">{{ mnemonic }}</option>
+                             {% endfor %}
+                         {% endif %}
+                         </select><br>
+                         <select name="Second_Track" value="{{ request.POST.Second_Track }}" class="browser-default" id="as" style="color: black">
+                            <option value="" selected="selected"> Second_Track</option>
+                         {% if curve_mnemonic %}
+                             {% for mnemonic in curve_mnemonic %}
+                                 <option class="opt">{{ mnemonic }}</option>
+                             {% endfor %}
+                         {% endif %}
+                         </select>
+
+                     </div>
+            {% if curve_descr %}
+                {% for descr in curve_descr %}
+                    {#<p>{{ descr }}</p>#}
+                {% endfor %}
+            {% endif %}
+
+
+            <div class="group" style="margin-top: 20px !important;">
+                <button type="submit" class="btn btn-success black" style="color: #e0f2f1">Submit</button>
+            </div>
+     </form>
+</div>
+
+{% endblock %}

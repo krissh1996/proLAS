@@ -1,0 +1,42 @@
+{%extends "base.html" %}
+
+{%block content %}
+
+<div class="home_view ui container">
+
+    <h1>Standard Log Plot</h1>
+    <h3>Select the LAS file</h3>
+
+    {% if messages %}
+    {% for message in messages %}
+        {{ message}}
+    {% endfor %}
+    {% endif %}
+    {% for file in filelist %}
+    {#<p>{{ file }}</p>#}
+    {% endfor %}
+    {% for curve in l.curves %}
+        <p>{{ curve.mnemonic }}</p>
+    {% endfor %}
+     <form class="form-horizontal" method="post" action="{% url 'plot' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+                     <div class="" >
+                         <select name="file" value="{{ request.POST.file }}" class="browser-default" id="as" style="color: black">
+                            <option value="" selected="selected">Choose File</option>
+                         {% if filelist %}
+                             {% for file in filelist %}
+                                 <option class="opt" value="{{ file }}">{{ file }}</option>
+                             {% endfor %}
+                         {% endif %}
+                         </select>
+                     </div>
+
+
+            <div class="group" style="margin-top: 20px !important;">
+                <button type="submit" class="btn btn-success black" style="color: #e0f2f1">Read</button>
+            </div>
+     </form>
+
+</div>
+
+{% endblock %}
